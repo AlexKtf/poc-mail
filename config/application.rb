@@ -20,5 +20,26 @@ module PocMail
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.initialize_on_precompile = false
+
+
+    # config.action_mailer.smtp_settings = {
+    #   address:              'smtp.gmail.com',
+    #   port:                 587,
+    #   domain:               'poc-mail.herokuapp.com',
+    #   user_name:            'alexandre.ktifa@gmail.com',
+    #   password:             'fayabomboclatt',
+    #   authentication:       :plain
+    # }
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_url_options = { host: 'poc-mail.herokuapp.com' }
+    config.action_mailer.smtp_settings = {
+      user_name: ENV['STK_MAIL_USERNAME'],
+      password: ENV['STK_MAIL_PASSWORD'],
+      address: ENV['STK_MAIL_SERVER'],
+      port: ENV['STK_MAIL_PORT'],
+      domain: 'poc-mail.herokuapp.com',
+      authentication: :plain
+    }
   end
 end

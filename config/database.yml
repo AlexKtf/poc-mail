@@ -20,8 +20,8 @@ development:
   database: poc_mail_development
   pool: 5
   host: localhost
-  username: poc_mail
-  password: poc_mail
+  username: ideesbebe
+  password: sefsef
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -50,8 +50,8 @@ test:
   database: poc_mail_test
   host: localhost
   pool: 5
-  username: poc_mail
-  password: poc_mail
+  username: ideesbebe
+  password: sefsef
 
 production:
   adapter: postgresql
@@ -59,5 +59,5 @@ production:
   database: poc_mail_production
   host: localhost
   pool: 5
-  username: poc_mail
-  password: poc_mail
+  username: ideesbebe
+  password: sefsef

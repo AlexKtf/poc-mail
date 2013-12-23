@@ -15,7 +15,8 @@ PocMail::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :conversation, only: [:index]
-  resources :members, only: [:show], controller: :conversation
+  resources :user, only: [:show, :update]
+  resources :message, only: [:show, :create]
   root 'conversation#index'
 
   # Example resource route with options:
