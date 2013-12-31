@@ -17,6 +17,8 @@ PocMail::Application.routes.draw do
   resources :conversation, only: [:index]
   resources :user, only: [:show, :update]
   resources :message, only: [:show, :create]
+
+  resources :inbox, only: [:show, :create]
   root 'conversation#index'
 
   # Example resource route with options:
