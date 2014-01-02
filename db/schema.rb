@@ -11,15 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220155622) do
+ActiveRecord::Schema.define(version: 20140101181709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "messages", force: true do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
+    t.integer "user_id"
+    t.integer "room_id"
     t.text    "content"
+  end
+
+  create_table "room_users", force: true do |t|
+    t.integer "room_id"
+    t.integer "user_id"
+  end
+
+  add_index "room_users", ["room_id"], name: "index_room_users_on_room_id", using: :btree
+  add_index "room_users", ["user_id"], name: "index_room_users_on_user_id", using: :btree
+
+  create_table "rooms", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

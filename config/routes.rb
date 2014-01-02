@@ -14,12 +14,14 @@ PocMail::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :conversation, only: [:index]
   resources :user, only: [:show, :update]
-  resources :message, only: [:show, :create]
+  resources :message, only: [:create]
+  resources :room, only: [:create, :show, :index] do
+    resources :room_user, only: [:create]
+  end
 
   resources :inbox, only: [:show, :create]
-  root 'conversation#index'
+  root 'room#index'
 
   # Example resource route with options:
   #   resources :products do

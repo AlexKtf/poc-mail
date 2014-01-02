@@ -1,0 +1,23 @@
+%div{ style: 'width: 800px;margin: auto'}
+  %div{ style: 'width: 600px;float:left'}
+    - @messages.each do |msg|
+      - position = msg.user_id == current_user.id ? 'left' : 'right'
+      - color = msg.user_id == current_user.id ? 'white' : 'grey'
+      %div{ style: "width: 300px;float: #{position};background-color: #{color}; margin: auto" }
+        = msg.content
+      %br
+    %div{ style: 'clear: both; text-align: center' }
+      = form_for Message.new, url: message_index_path, method: :post do |f|
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :room_id, value: @room.id
+        = f.text_field :content
+        = f.submit 'Envoyer'
+  %div{ style: 'width: 200px;float: left'}
+    - users = User.all.map { |u| [u.name, u.id] }
+    - users.reject!{ |u|  @room.roomers.map(&:id).include? u[1] }
+    = form_for RoomUser.new, url: room_room_user_index_path(@room), method: :post do |f|
+      = f.select :user_id, users
+      = f.submit 'Inviter'
+    - @room.roomers.each do |user|
+      %p= user.name
+  
