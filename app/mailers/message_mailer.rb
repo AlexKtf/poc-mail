@@ -2,8 +2,11 @@ class MessageMailer < ActionMailer::Base
 
   def has_new_message message
     @content = message.content
-    mail(to: '<alexandre.ktifa@gmail.com>',
-         from: "<#{message.user.name}@user.studyka.com>",
-         subject: "Please see the Terms and Conditions attached")
+    @user = message.user
+    roomers = message.room.roomers.reject{ |u| u == message.user }
+    roomers = roomers.map(&:email).join('>, <')
+    mail(to: "<#{roomers}>",
+         from: "#{message.user.name} <#{message.room.id}@user.studyka.com>",
+         subject: "#{message.user.name} à écrit un nouveaux message pour la room #{message.room.id}")
   end
 end
