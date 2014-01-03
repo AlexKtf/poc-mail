@@ -6,10 +6,11 @@
     - if not current_user.has_simple_room_with? u
       = form_for Room.new, url: room_index_path, method: :post do |f|
         = f.hidden_field :roomers, value: u.id
-        = f.submit 'Nouvelle discustion simple'
-    - rooms.each do |r|
-      - if r.roomers.include? u
-        - roomers = r.roomers.reject!{ |u|  u.id == current_user.id }
-        = link_to "Discuter avec #{roomers.map(&:name).to_sentence}", room_path(r)
-      %br
+        = f.button 'Nouvelle discustion simple', name: 'commit', type: 'submit', class: 'btn'
+    %ul
+      - rooms.each do |r|
+        - if r.roomers.include? u
+          - roomers = r.roomers.reject!{ |u| u.id == current_user.id }
+          %li
+            = link_to "Discuter avec #{roomers.map(&:name).to_sentence}", room_path(r)
   %br
